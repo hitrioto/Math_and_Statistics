@@ -1,0 +1,278 @@
+
+\title{Упражнения за курса \\ Математически основи на машинното самообучение}
+
+\author{}
+%\author{Илия Мардов\thanks{
+%		College of self-learning}
+%	\and
+%	DP\thanks{
+%		The Virtual University
+%	}\thanks{This work was
+%		supported by NSB grant number G983578765401.}
+%}
+
+\documentclass{article}
+
+\usepackage{amsmath}
+\newtheorem{exercise}[subsubsection]{Упажнение}
+
+\usepackage{graphicx}
+
+\usepackage[english, bulgarian]{babel}
+
+\usepackage[backend=biber]{biblatex} % 
+\addbibresource{References.bib}
+
+\usepackage{listings}
+
+
+
+\newtheorem{theorem}{Theorem}
+\newtheorem{lemma}{Lemma}
+\newtheorem{proposition}{Proposition}
+\newtheorem{scolium}{Scolium}   %% And a not so common one.
+\newtheorem{definition}{Definition}
+\newenvironment{proof}{{\sc Proof:}}{~\hfill QED}
+\newenvironment{AMS}{}{}
+\newenvironment{keywords}{}{}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{document}
+	\newpage
+	\date{}
+	\maketitle
+
+	\begin{abstract}
+		Упражнения за курса Математически основи на машинното самообучение
+	\end{abstract}
+	
+	\tableofcontents
+		
+
+	% \section*{0  \hspace{0.4cm}Упражнение 0. Python, R, инсталиране на среда}
+
+	\section{Уводни бележки. Линейна регресия.}
+	\subsection{Уводни бележки}
+	Мотивация - Курсът има широко приложение в индустрията.\\	
+	Литература:
+	\begin{enumerate}
+	\item  Introduction to statistical learning \cite{james2023introduction}.
+	\item  Elements of Statistical learning  \cite{hastie01statisticallearning}.
+	\end{enumerate}
+	
+	\noindent
+	Какво ще съдържа курса? \\
+	
+	\noindent
+	Исторически бележки - Vapnik theory. \\
+
+	\noindent	
+	Среда за писане на код - VsCode, Anaconda + Spyder, Jupyter Notebook. \\
+ 	Алтернативно - R, R Studio.
+	\subsection{Линейна регресия}
+	Lab 2.3 Introduction to Python. \\
+	Данни, разглеждане - упражнение 2.8, 2.9 или 2.10 от Applied. \\
+	
+	Преговаряне на метод на най-малките квадрати.
+	
+	Права, която минимизира $\sum (y-\hat{y})^2  $ и има вида $ y = ax + b$, където $x \in R^n $, може да се намери с метод на най-малките квадрати. \\
+	С какво е полезна линейната регресия? Не трябва да се пренебрегва, често тя е $"$някакъв старт$"$ в работата. \\
+	Плюсове и минуси - прост модел, лесно се смята и разбира, лесно се обяснява, недоба в нелинейни задачи. \\
+	
+	Multiple regression и значение на променливите, примерът на Hastie and Tibshirani с успоредни прави. \\
+	Успоредни прави и интерпретация. \\
+	Lab 3.6 
+
+		
+\newpage	
+\section{Логистична регресия. Linear Discriminant \\ analysis. Naive Bayes Model.}
+
+
+
+
+	\subsection{Кратка информация}
+	Мотивация - логистичната регресия се използва за Credit Score модели.\\
+	Loss function = log. \\
+	$$Log Function $$
+	
+	Naive Bayes - .... \\
+	Linear Discriminant analysis \\
+	
+	\subsection{Теоритични упражнения}
+	Conceptual 4.8 section, ex 1, 2, 12 \\
+	
+	\begin{exercise}[Sec 4.8, Conceptual ex. 1]
+		asdasasdsa
+	\end{exercise}
+
+	\begin{exercise}[Sec 4.8, Conceptual ex. 2]
+		asdasasdsa
+	\end{exercise}
+
+	\begin{exercise}[Sec 4.8, Conceptual ex. 12]
+		asdasasdsa
+	\end{exercise}
+
+	\begin{exercise}[Sec 4.8, Conceptual ex. 12]
+	asdasasdsa
+	\end{exercise}
+
+
+	%Suppose that you wish to classify an observation X ∈ R into apples
+	and oranges. You fit a logistic regression model and find that
+	
+	Pr(Y = orange|X = x) =
+	%exp(ˆβ0 + ˆβ1x)
+	%1 + exp(ˆβ0 + ˆβ1x)
+	.
+	Your friend fits a logistic regression model to the same data using the
+	softmax formulation in (4.13), and finds that
+	$$Pr(Y= orange| X=x) = \frac{exp(\hat{a}_{orange} + \hat{a}_{orangex}) }{den}$$
+	Pr(Y = orange|X = x) =
+	%exp(ˆαorange0 + ˆαorange1x)
+	%exp(ˆαorange0 + ˆαorange1x) + exp(ˆαapple0 + ˆαapple1x).
+	(a) What is the log odds of orange versus apple in your model?
+	(b) What is the log odds of orange versus apple in your friend’s
+	model?
+	(c) Suppose that in your model, $\beta_0$ and $\beta_1$. What are
+	the coefficient estimates in your friend’s model? Be as specific
+	as possible.
+	(d) Now suppose that you and your friend fit the same two models
+	on a different data set. This time, your friend gets the coefficient
+	%estimates ˆαorange0 = 1.2, ˆαorange1 = −2, ˆαorange0 = 3, ˆαorange1 =
+	0.6. What are the coefficient estimates in your model?
+	(e) Finally, suppose you apply both models from (d) to a data set
+	with 2,000 test observations. What fraction of the time do you
+	expect the predicted class labels from your model to agree with
+	those from your friend’s model? Explain your answer. \\
+	
+	Applied as well \\
+	
+	\newpage
+	\section{Feature Selection. Model Selection - AIC, BIC. Bias-Variance tradeoff. K-fold Cross Validation.} 
+	Weight of evidence, information value - използват се в индустрията, например при разработка на credit score модел, логистична регресия. \\
+	В книгата има 4 подхода при избор на оптимален модел: \\
+	$C_p$ статистика: $C_p = \frac{1}{n}(RSS + 2d \hat \sigma^2)$ за squared error loss
+	\begin{itemize}
+		\item $AIC = \frac{1}{n}(RSS + 2d \hat \sigma^2)$
+		\item $BIC = \frac{1}{n}(RSS + log(n) d \hat \sigma^2)$
+		\item $Adjusted \hspace{0.1cm} R^2 = 1 - \frac{RSS/(n-d-1)}{TSS/(n-1)} $
+	\end{itemize}
+	(да се добави значението на параметрите по-късно) \\
+	(код за пресмятане с пример) \\
+	
+%	\begin{lstlisting}[language=Python]
+%	def BIC_calc(free_param, stat, dof):
+%	n = dof + free_param
+%	k = free_param
+%	return stat + np.log(n)*k
+%\end{lstlisting}
+
+	lab 6 за model selection \\
+	Forward, Backward selection example \\
+	Следните алгоритми са взети от книгата: \\
+	Алгоритъм за best subset selection: 
+	\begin{enumerate}
+		\item Let M0 denote the null model, which contains no predictors. This
+		model simply predicts the sample mean for each observation.
+		\item For k = 1, 2, . . . p: 
+			\begin{enumerate}
+				\item Fit all $(?)$ p choose k models that contain exactly k predictors.
+				\item Pick the best among these  $(?)$ p choose k models, and call it Mk. Here best
+				is defined as having the smallest RSS, or equivalently largest R2.
+			\end{enumerate}
+		\item Select a single best model from among M0, . . . , Mp using using the
+		prediction error on a validation set, Cp (AIC), BIC, or adjusted R2.
+		Or use the cross-validation method
+	\end{enumerate}
+	
+	Алгоритъм за Forward selection: 
+	\begin{enumerate}
+				\item Let M0 denote the null model, which contains no predictors.
+		\item For k = 1, 2, . . . p: 
+		\begin{enumerate}
+			\item Consider all $p-k$   models that augment the predictors in Mk
+			with one additional predictor.
+			\item Choose the best among these$p-k$    models, and call it Mk+1.
+			Here best is defined as having smallest RSS or highest R2.
+		\end{enumerate}
+		\item Select a single best model from among M0, . . . , Mp using the pre-
+		diction error on a validation set, Cp (AIC), BIC, or adjusted R2. Or
+		use the cross-validation method.
+	\end{enumerate}
+	
+	
+	Credit data\\
+	
+	5.3 Lab python book: Cross-Validation and the Bootstrap \\
+	
+\newpage
+\section{Generalized linear models. Lasso, Ridge. Generalized additive models. }
+
+
+
+	Lasso and Ridge from the book.\\
+	Lasso formula, Ridge formula, explanation \\
+	
+	
+	A generalized linear model looks like this\\
+	lab 6 за ridge lasso \\
+	Change $\lambda$ for Lasso example.
+	
+	
+	
+	Подробно разписване на оптимизационната задача. Идея за множество от бъдещите задачи
+	се разглеждат като оптимизационни.
+	
+\newpage	
+\section{Нелинейни модели. Piecewise polynomials. Splines. Generalized additive models }
+Lab 7.8 python \\
+ex 7.9 6,10,11
+	
+	
+	
+\newpage	
+\section{Decision trees. Random fores. Bagging, boosting.}
+	
+\newpage
+\section{Support Vector Machines. Метод на опорните вектори.}	
+Separating hyperplane. Why is it non-robust?(example) \\
+
+	
+	
+	
+\newpage
+\section{Clustering. K-means clustering. Higherarchical clustering, Йерархично клъстериране}	
+
+	K means ex 1 and 3, 10
+
+	Chapter 12, ex 13, hierarchical \\ 
+
+	\cite{hastie01statisticallearning}
+	
+	
+	\newpage
+	
+	\addcontentsline{toc}{section}{References}
+	\printbibliography
+
+%	\section*{About the author:}
+%	We would like a short biographical sketch,
+%	beyond just your affiliation to be placed
+%	after the bibliography.
+%	And below that, your full address.
+%	
+%	
+%	
+%	\subsection*{Primus Scriber}
+%	College of the Enlightenment,
+%	Philadelphia, Pennsylvania, 42345-6543$\pm\epsilon$.
+%	pscriber@cenet.edu
+%	
+%	\subsection*{Theco Author}~
+%	Department of Statistics,
+%	The Virtual University,
+%	New York, NY 13291-5555.
+%	also@aol.com
+	
+\end{document}
