@@ -11,6 +11,8 @@
 %		supported by NSB grant number G983578765401.}
 %}
 
+
+
 \documentclass{article}
 
 \usepackage{amsmath}
@@ -18,14 +20,14 @@
 
 \usepackage{graphicx}
 
+\usepackage{enumitem}
+
 \usepackage[english, bulgarian]{babel}
 
 \usepackage[backend=biber]{biblatex} % 
 \addbibresource{References.bib}
 
-\usepackage{listings}
-
-
+%\usepackage{listings}
 
 \newtheorem{theorem}{Theorem}
 \newtheorem{lemma}{Lemma}
@@ -36,6 +38,11 @@
 \newenvironment{AMS}{}{}
 \newenvironment{keywords}{}{}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+
+\usepackage{pythonhighlight}
+
 
 \begin{document}
 	\newpage
@@ -51,7 +58,7 @@
 
 	% \section*{0  \hspace{0.4cm}Упражнение 0. Python, R, инсталиране на среда}
 
-	\section{Уводни бележки. Линейна регресия.}
+	\section{Уводни бележки. Базов Python. Линейна регресия.}
 	\subsection{Уводни бележки}
 	Мотивация - Курсът има широко приложение в индустрията.\\	
 	Литература:
@@ -70,22 +77,166 @@
 	Среда за писане на код - VsCode, Anaconda + Spyder, Jupyter Notebook. \\
  	Алтернативно - R, R Studio.
 	\subsection{Линейна регресия}
-	Lab 2.3 Introduction to Python. \\
+	Lab 2.3 Introduction to Python. Setup на среда и най-базови неща в Python.\\
 	Данни, разглеждане - упражнение 2.8, 2.9 или 2.10 от Applied. \\
 	
-	Преговаряне на метод на най-малките квадрати.
-	
-	Права, която минимизира $\sum (y-\hat{y})^2  $ и има вида $ y = ax + b$, където $x \in R^n $, може да се намери с метод на най-малките квадрати. \\
-	С какво е полезна линейната регресия? Не трябва да се пренебрегва, често тя е $"$някакъв старт$"$ в работата. \\
+	Преговаряне на метод на най-малките квадрати: \\
+	Нека имаме множество от точки $(x_1,y_1), (x_n,y_n), \dots (x_n,y_n)$. 
+	Права от вида $\hat y = \hat \beta_0 + \sum \hat \beta_i  x_i $, която минимизира $\sum (y-\hat{y})^2$  може да се намери с метод на най-малките квадрати. \\
+	С какво е полезна линейната регресия? Не трябва да се пренебрегва, може да се използва за $"$старт$"$.\\
 	Плюсове и минуси - прост модел, лесно се смята и разбира, лесно се обяснява, недоба в нелинейни задачи. \\
 	
-	Multiple regression и значение на променливите, примерът на Hastie and Tibshirani с успоредни прави. \\
-	Успоредни прави и интерпретация. \\
-	Lab 3.6 
+	Да се добави Мultiple regression и значение на променливите, примерът на Hastie and Tibshirani с успоредни прави. \\
+	
+	Следва Lab 3.6 
+	\subsection{Упражнения}
+	В зависимост от отделеното време на въведение в Python,
+	2 от 3 по-долу може би ще е добре
+	
+	\begin{exercise}[2.8]
+		This exercise relates to the College data set, which can be found in
+		the file College.csv on the book website. It contains a number of
+		variables for 777 different universities and colleges in the US. The
+		variables are
+		\begin{itemize}
+			\item $\mathbf{Private}$ : Public/private indicator
+			\item Apps : Number of applications received
+			\item Accept : Number of applicants accepted
+			\item Enroll : Number of new students enrolled
+			\item Top10perc : New students from top 10 \% of high school class
+			\item Top25perc : New students from top 25 \% of high school class
+			\item F.Undergrad : Number of full-time undergraduates
+			\item P.Undergrad : Number of part-time undergraduates
+			\item Outstate : Out-of-state tuition
+			\item Room.Board : Room and board costs
+			\item Books : Estimated book costs
+			\item PhD : Percent of faculty with Ph.D.s
+			\item  Terminal : Percent of faculty with terminal degree
+			\item S.F.Ratio : Student/faculty ratio
+			\item perc.alumni : Percent of alumni wh
+			\item Expend : Instructional expenditure per student
+			\item Grad.Rate : Graduation rate
+		\end{itemize}
+	 Before reading the data into Python, it can be viewed in Excel or a
+	 text editor.
+	\begin{enumerate}[label=(\alph*)]
+		\item  Use the pd.read\_csv() function to read the data into Python. Call
+		the loaded data college. Make sure that you have the directory
+		set to the correct location for the data.
+		\item Look at the data used in the notebook by creating and running
+		a new cell with just the code college in it. You should notice
+		that the first column is just the name of each university in a
+		column named something like Unnamed: 0. We don’t really want
+		pandas to treat this as data. However, it may be handy to have
+		these names for later. Try the following commands and similarly
+		look at the resulting data frames:
+		\begin{python}[language=Python]
+college2 = pd.read_csv('College.csv', index_col=0)
+college3 = college.rename({'Unnamed: 0': 'College'},
+													axis=1)
+college3 = college3.set_index('College')
+	\end{python}		
+This has used the first column in the file as an index for the
+data frame. This means that pandas has given each row a name
+corresponding to the appropriate university. Now you should see
+that the first data column is Private. Note that the names of
+the colleges appear on the left of the table. We also introduced
+a new python object above: a dictionary, which is specified by dictionary
+(key, value) pairs. Keep your modified version of the data with
+the following:
+\begin{python}
+	college = college3
+\end{python}
 
+		\item Use the describe() method of to produce a numerical summary
+		of the variables in the data set.
+		\item Use the pd.plotting.scatter\_matrix() function to produce a
+		scatterplot matrix of the first columns [Top10perc, Apps, Enroll].
+		Recall that you can reference a list C of columns of a data frame
+		A using A[C].
+		\item Use the boxplot() method of college to produce side-by-side
+		boxplots of Outstate versus Private.
+		\item Create a new qualitative variable, called Elite, by binning the
+		Top10perc variable into two groups based on whether or not the
+		proportion of students coming from the top 10% of their high
+		school classes exceeds 50%.
+		\begin{python}
+college['Elite'] = pd.cut(college['Top10perc'],
+[0,0.5,1],
+labels=['No', 'Yes'])
+		\end{python}
+		\item Use the value\_counts() method of college['Elite'] to see how
+		many elite universities there are. Finally, use the boxplot() method
+		again to produce side-by-side boxplots of Outstate versus Elite.
+		\item Use the plot.hist() method of college to produce some his-
+		tograms with differing numbers of bins for a few of the quanti-
+		tative variables. The command plt.subplots(2, 2) may be use-
+		ful: it will divide the plot window into four regions so that four
+		plots can be made simultaneously. By changing the arguments
+		you can divide the screen up in other combinations.
+		\item Continue exploring the data, and provide a brief summary of
+		what you discover.		
+	\end{enumerate}		
+	\end{exercise}
+
+\begin{exercise}[2.9]
+	This exercise involves the Auto data set studied in the lab. Make sure
+	that the missing values have been removed from the data.
+	\begin{enumerate}[label=(\alph*)]
+		\item Which of the predictors are quantitative, and which are quali-
+		tative?
+		\item  What is the range of each quantitative predictor? You can an-
+		swer this using the min() and max() methods in numpy.
+		\item What is the mean and standard deviation of each quantitative
+		predictor?
+		\item  Now remove the 10th through 85th observations. What is the
+		range, mean, and standard deviation of each predictor in the
+		subset of the data that remains?
+		\item Using the full data set, investigate the predictors graphically,
+		using scatterplots or other tools of your choice. Create some plots
+		highlighting the relationships among the predictors. Comment
+		on your findings.
+		\item  Suppose that we wish to predict gas mileage (mpg) on the basis
+		of the other variables. Do your plots suggest that any of the
+		other variables might be useful in predicting mpg? Justify your
+		answer.
+		
+	\end{enumerate}
+\end{exercise}
+	\begin{exercise}[2.10]
+		This exercise involves the Boston housing data set.
+		\begin{enumerate}[label=(\alph*)]
+		\item To begin, load in the Boston data set, which is part of the ISLP
+		library.
+		\item How many rows are in this data set? How many columns? What
+		do the rows and columns represent?
+		\item Make some pairwise scatterplots of the predictors (columns) in
+		this data set. Describe your findings.
+		\item Are any of the predictors associated with per capita crime rate?
+		If so, explain the relationship. 
+		\item Do any of the suburbs of Boston appear to have particularly
+		high crime rates? Tax rates? Pupil-teacher ratios? Comment on
+		the range of each predictor.		 
+		\item How many of the suburbs in this data set bound the Charles
+		river?		 
+		\item What is the median pupil-teacher ratio among the towns in this
+		data set?		 
+		\item Which suburb of Boston has lowest median value of owner-
+		occupied homes? What are the values of the other predictors
+		for that suburb, and how do those values compare to the overall
+		ranges for those predictors? Comment on your findings.	 	 
+		\item In this data set, how many of the suburbs average more than
+		seven rooms per dwelling? More than eight rooms per dwelling?
+		Comment on the suburbs that average more than eight rooms
+		per dwelling.
+		\end{enumerate}
+	\end{exercise}
+	
+		
+		
 		
 \newpage	
-\section{Логистична регресия. Linear Discriminant \\ analysis. Naive Bayes Model.}
+\section{Логистична регресия. Linear Discriminant \\ analysis.}
 
 
 
@@ -96,13 +247,21 @@
 	$$Log Function $$
 	
 	Naive Bayes - .... \\
+	Теорема на Bayes: \\
 	Linear Discriminant analysis \\
+	Ако класовете са с многомерно гаусово разпределение, или
+	$$f_k(x) = \frac{1}{(2\pi)^p/2 \left | \Sigma_k  \right |} e^{-\frac{1}{2} (x-\mu_k)^T \Sigma_k^{-1}(x-\mu_k)} $$
+	в специалния случай, където ковариационните матрици са равни, $\Sigma_k = \Sigma \forall k$, имаме 
+	Линеен дискриминантен анализ.
 	
-	\subsection{Теоритични упражнения}
+	
+	\subsection{Упражнения}
 	Conceptual 4.8 section, ex 1, 2, 12 \\
-	
+
 	\begin{exercise}[Sec 4.8, Conceptual ex. 1]
-		asdasasdsa
+			Using a little bit of algebra, prove that (4.2) is equivalent to (4.3). In
+		other words, the logistic function representation and logit represen-
+		tation for the logistic regression model are equivalent.
 	\end{exercise}
 
 	\begin{exercise}[Sec 4.8, Conceptual ex. 2]
@@ -114,11 +273,7 @@
 	\end{exercise}
 
 	\begin{exercise}[Sec 4.8, Conceptual ex. 12]
-	asdasasdsa
-	\end{exercise}
-
-
-	%Suppose that you wish to classify an observation X ∈ R into apples
+	Suppose that you wish to classify an observation $x \in R $ into apples
 	and oranges. You fit a logistic regression model and find that
 	
 	Pr(Y = orange|X = x) =
@@ -145,8 +300,11 @@
 	with 2,000 test observations. What fraction of the time do you
 	expect the predicted class labels from your model to agree with
 	those from your friend’s model? Explain your answer. \\
+	\end{exercise}
+
+
 	
-	Applied as well \\
+	
 	
 	\newpage
 	\section{Feature Selection. Model Selection - AIC, BIC. Bias-Variance tradeoff. K-fold Cross Validation.} 
@@ -161,12 +319,12 @@
 	(да се добави значението на параметрите по-късно) \\
 	(код за пресмятане с пример) \\
 	
-%	\begin{lstlisting}[language=Python]
+%	\begin{python}[language=Python]
 %	def BIC_calc(free_param, stat, dof):
 %	n = dof + free_param
 %	k = free_param
 %	return stat + np.log(n)*k
-%\end{lstlisting}
+%\end{python}
 
 	lab 6 за model selection \\
 	Forward, Backward selection example \\
