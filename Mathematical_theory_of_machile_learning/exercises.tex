@@ -27,6 +27,9 @@
 \usepackage[backend=biber]{biblatex} % 
 \addbibresource{References.bib}
 
+\usepackage{hyperref}
+
+
 %\usepackage{listings}
 
 \newtheorem{theorem}{Theorem}
@@ -68,7 +71,7 @@
 	\end{enumerate}
 	
 	\noindent
-	Какво ще съдържа курса? \\
+	Какво ще съдържа курса? Приблизително съдържанието на тези записки. \\
 	
 	\noindent
 	Исторически бележки - Vapnik theory. \\
@@ -76,14 +79,20 @@
 	\noindent	
 	Среда за писане на код - VsCode, Anaconda + Spyder, Jupyter Notebook. \\
  	Алтернативно - R, R Studio.
+ 	\subsection{Базов Python}
+ 	Setup на среда и най-базови неща в Python.\\
+ 	
+ 	Lab 2.3 Introduction to Python от Python книгата. Линк: \\
+
+ 	\href{https://intro-stat-learning.github.io/ISLP/labs/Ch02-statlearn-lab.html#}{https://intro-stat-learning.github.io/ISLP/labs/Ch02-statlearn-lab.html\#}.
+ 	
 	\subsection{Линейна регресия}
-	Lab 2.3 Introduction to Python. Setup на среда и най-базови неща в Python.\\
 	Данни, разглеждане - упражнение 2.8, 2.9 или 2.10 от Applied. \\
 	
 	Преговаряне на метод на най-малките квадрати: \\
 	Нека имаме множество от точки $(x_1,y_1), (x_n,y_n), \dots (x_n,y_n)$. 
 	Права от вида $\hat y = \hat \beta_0 + \sum \hat \beta_i  x_i $, която минимизира $\sum (y-\hat{y})^2$  може да се намери с метод на най-малките квадрати. \\
-	С какво е полезна линейната регресия? Не трябва да се пренебрегва, може да се използва за $"$старт$"$.\\
+	С какво е полезна линейната регресия? Mоже да се използва за $"$старт$"$.\\
 	Плюсове и минуси - прост модел, лесно се смята и разбира, лесно се обяснява, недоба в нелинейни задачи. \\
 	
 	Да се добави Мultiple regression и значение на променливите, примерът на Hastie and Tibshirani с успоредни прави. \\
