@@ -11,41 +11,29 @@
 %		supported by NSB grant number G983578765401.}
 %}
 
-
-
 \documentclass{article}
-
 \usepackage{amsmath}
 \newtheorem{exercise}[subsubsection]{Упажнение}
-
 \usepackage{graphicx}
-
 \usepackage{enumitem}
-
 \usepackage[english, bulgarian]{babel}
-
 \usepackage[backend=biber]{biblatex} % 
 \addbibresource{References.bib}
-
 \usepackage{hyperref}
-
-
-%\usepackage{listings}
+\usepackage{listings}
 
 \newtheorem{theorem}{Theorem}
 \newtheorem{lemma}{Lemma}
 \newtheorem{proposition}{Proposition}
 \newtheorem{scolium}{Scolium}   %% And a not so common one.
 \newtheorem{definition}{Definition}
-\newenvironment{proof}{{\sc Proof:}}{~\hfill QED}
+
+\usepackage{amssymb} % for blackbox
+\newenvironment{proof}{{\sc доказателство:}}{~\hfill $\blacksquare$ }
 \newenvironment{AMS}{}{}
 \newenvironment{keywords}{}{}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-
-
 \usepackage{pythonhighlight}
-
 
 \begin{document}
 	\newpage
@@ -74,13 +62,30 @@
 	Какво ще съдържа курса? Приблизително съдържанието на тези записки. \\
 	
 	\noindent
-	Исторически бележки - Vapnik theory. \\
+	Исторически бележки - Vapnik theory.(може да се добавят няколко изречения) \\
 
 	\noindent	
-	Среда за писане на код - VsCode, Anaconda + Spyder, Jupyter Notebook. \\
- 	Алтернативно - R, R Studio.
+	Среда за писане на код - VsCode и/или Anaconda + Spyder, Jupyter Notebook. \\
+ 	Забележка: преди 2 години Anaconda стана платена при enterprise, имайте го предвид.\\
+ 	Тук ще изпозлваме Python 3.10.11, последната версия с prebuild инсталационен пакет от python.org,
+ 	от версиите 3.10.11. За 3.11 и наскоро излязлата 3.12 нямаме още всички пакети. Ако ще изпозлваме виртуална среда: 	
+ 	\begin{lstlisting}[language=bash]
+$pip install virtualenv
+ 	\end{lstlisting}
+ 	(Да се добавят git clone и прочие... команди и и описания) \\
+ 	
+ 	Отваряме с VSCode папката с кода на упражненията и пишем:
+	\begin{lstlisting}[language=bash]
+$pip install -r requirements.txt
+ 	\end{lstlisting}
+ 	За инсталиране на пакетите, които се използват в курса. \\
+ 	Линк към страницата с Lab упражненията от книгата:\\
+ 	\href{https://intro-stat-learning.github.io/ISLP/installation.html}{https://intro-stat-learning.github.io/ISLP/installation.html}
+ 	
  	\subsection{Базов Python}
- 	Setup на среда и най-базови неща в Python.\\
+ 	Най-базови неща в Python - python list, set, import packages, най-базови фунцкии в numpy,
+ 	събиране на вектори и умножение на вектори с число, скаларно произведение, матрици.
+ 	pandas пакета и пример за графика с matplotlib.pyplot.\\
  	
  	Lab 2.3 Introduction to Python от Python книгата. Линк: \\
 
@@ -88,6 +93,8 @@
  	
 	\subsection{Линейна регресия}
 	Данни, разглеждане - упражнение 2.8, 2.9 или 2.10 от Applied. \\
+	(!) Добре е или да се разгледат функциите load\_data() от ISLP пакета или
+	да се изнесе частта от кода за конкретния dataset при упражненията.
 	
 	Преговаряне на метод на най-малките квадрати: \\
 	Нека имаме множество от точки $(x_1,y_1), (x_n,y_n), \dots (x_n,y_n)$. 
@@ -252,17 +259,26 @@ labels=['No', 'Yes'])
 
 	\subsection{Кратка информация}
 	Мотивация - логистичната регресия се използва за Credit Score модели.\\
-	Loss function = log. \\
-	$$Log Function $$
+	Моделът има вида: \\
+	$\mathbb{E}(Y|X_1, \dots, X_p) = Prob(Y=1|X_1, \dots, X_p) = \frac{e^{\beta_0 + \beta_1 X_1 + \dots + \beta_p X_p}}{1+ e^{\beta_0 + \beta_1 X_1 + \dots + \beta_p X_p}} $
 	
+	Идея за други класификационни модели - Linear Discriminant Analysis, Quadratic Discriminant Analysis, Naive Bayes.
 	Naive Bayes - .... \\
-	Теорема на Bayes: \\
 	Linear Discriminant analysis \\
 	Ако класовете са с многомерно гаусово разпределение, или
 	$$f_k(x) = \frac{1}{(2\pi)^p/2 \left | \Sigma_k  \right |} e^{-\frac{1}{2} (x-\mu_k)^T \Sigma_k^{-1}(x-\mu_k)} $$
 	в специалния случай, където ковариационните матрици са равни, $\Sigma_k = \Sigma \forall k$, имаме 
 	Линеен дискриминантен анализ.
 	
+	Теорема на Bayes с доказателство(припомняне): 
+	\begin{theorem}[Bayes]
+		$P(A|B) = \frac{P(B|A)P(B)}{P(A)}.$
+	\end{theorem}
+	\begin{proof}
+		По дефиниция $P(A|B) = P(A\cap B)P(B)$ и $P(B|A) = P(B\cap A)P(A)$. Получаваме
+	 $P(A\cap B)= \frac{P(A|B) }{P(B)} = \frac{P(B|A) }{P(A)}$, откъдето следва равенството.
+	\end{proof}
+
 	
 	\subsection{Упражнения}
 	Conceptual 4.8 section, ex 1, 2, 12 \\
@@ -274,12 +290,9 @@ labels=['No', 'Yes'])
 	\end{exercise}
 
 	\begin{exercise}[Sec 4.8, Conceptual ex. 2]
-		asdasasdsa
+		А
 	\end{exercise}
 
-	\begin{exercise}[Sec 4.8, Conceptual ex. 12]
-		asdasasdsa
-	\end{exercise}
 
 	\begin{exercise}[Sec 4.8, Conceptual ex. 12]
 	Suppose that you wish to classify an observation $x \in R $ into apples
@@ -375,14 +388,26 @@ labels=['No', 'Yes'])
 	
 \newpage
 \section{Generalized linear models. Lasso, Ridge. Generalized additive models. }
-
+\subsection{Generalized linear models}
 
 
 	Lasso and Ridge from the book.\\
 	Lasso formula, Ridge formula, explanation \\
+	Въпрос: Как Ridge и Lasso fit-ват в общите линейни модели или
+	общите адитивни модели?
 	
 	
-	A generalized linear model looks like this\\
+	
+	Да припомним няколко регресии, които сме виждали:\\
+	\begin{itemize}
+		\item линейна - $\mathbb{E}(Y|X_1, \dots, X_p) = \beta_0 + \beta_1 X_1 + \dots + \beta_p X_p $
+		\item логистична -  $ \mathbb{E}(Y|X_1, \dots, X_p) = \frac{e^{\beta_0 + \beta_1 X_1 + \dots + \beta_p X_p}}{1+ e^{\beta_0 + \beta_1 X_1 + \dots + \beta_p X_p}} $
+		\item Поансонова -  $ \mathbb{E}(Y|X_1, \dots, X_p) = e^{\beta_0 + \beta_1 X_1 + \dots + \beta_p X_p} $
+ 	\end{itemize}
+	
+	Общият линеен модел изглежда по следния начин(където $\eta$ е $"$свързваща фунцкия$"$):\\
+	$$\eta(\mathbb{E}(Y|X_1, \dots, X_p)) = \beta_0 + \beta_1 X_1 + \dots + \beta_p X_p $$
+	
 	lab 6 за ridge lasso \\
 	Change $\lambda$ for Lasso example.
 	
@@ -392,11 +417,20 @@ labels=['No', 'Yes'])
 	се разглеждат като оптимизационни.
 	
 \newpage	
-\section{Нелинейни модели. Piecewise polynomials. Splines. Generalized additive models }
+\section{Нелинейни модели. Piecewise polynomials. Сплайни(Splines). Общи адитивни модели}
 Lab 7.8 python \\
-ex 7.9 6,10,11
-	
-	
+ex 7.9 6,10,11 \\
+\subsection{Общи адитивни модели(Generalized additive models)}
+Това е 7.7 от Python книгата. \\
+
+Общ адитивен модел се за регресия се задава с уравненията(където заменяме $x_i$ с $f(x_i)$ от модела на линейна регресия):
+$$y_i = \beta_0 + \sum_{j=1}^p f_j(x_{ij}) + \epsilon_i = \beta_0 + f_1(x_{i1}) + \dots + f_n(x_{ip}) + e_i $$
+за $i = 0,1 \dots n$.
+Общ адитивен модел се за класификация се задава с формулите:
+$$ log(\frac{p(X)}{1-p(X)}) = \beta_0 + \beta_1 f_1(X_1) + \beta_2 f_2(X_2) + \dots + \beta_p f_p(X_p),$$
+където отново $"$сме заменили $X$-овете от логистичната регресия с $f(X)$-ове$"$:
+$$ log(\frac{p(X)}{1-p(X)}) = \beta_0 + \beta_1 X_1 + \beta_2 X_2 + \dots + \beta_p X_p $$
+
 	
 \newpage	
 \section{Decision trees. Random fores. Bagging, boosting.}
