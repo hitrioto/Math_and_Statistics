@@ -18,5 +18,6 @@ print(Auto)
 
 # %%
 from ISLP import load_data
+# F12 on the load_data function to check source
 
 # %%

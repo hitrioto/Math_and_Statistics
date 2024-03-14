@@ -8,3 +8,7 @@
 *.blg
 *.run.xml
 *.toc
+
+*.out
+*.fls
+*.fdb_latexmk

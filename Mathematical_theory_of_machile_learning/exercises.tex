@@ -1,4 +1,3 @@
-
 \title{Упражнения за курса \\ Математически основи на машинното самообучение}
 
 \author{}
@@ -15,18 +14,25 @@
 \usepackage{amsmath}
 \newtheorem{exercise}[subsubsection]{Упажнение}
 \usepackage{graphicx}
+\graphicspath{ {./images/} }
 \usepackage{enumitem}
-\usepackage[english, bulgarian]{babel}
+
+\usepackage{csquotes}[style=fallback]
+\usepackage[T2A,T1]{fontenc}
+\usepackage[main=bulgarian, english]{babel}
+
 \usepackage[backend=biber]{biblatex} % 
 \addbibresource{References.bib}
 \usepackage{hyperref}
-\usepackage{listings}
+
+\usepackage{graphicx}
+%\usepackage{listings}
 
 \newtheorem{theorem}{Theorem}
 \newtheorem{lemma}{Lemma}
 \newtheorem{proposition}{Proposition}
 \newtheorem{scolium}{Scolium}   %% And a not so common one.
-\newtheorem{definition}{Definition}
+\newtheorem{definition}{Дефиниция}
 
 \usepackage{amssymb} % for blackbox
 \newenvironment{proof}{{\sc доказателство:}}{~\hfill $\blacksquare$ }
@@ -49,7 +55,7 @@
 
 	% \section*{0  \hspace{0.4cm}Упражнение 0. Python, R, инсталиране на среда}
 
-	\section{Уводни бележки. Базов Python. Линейна регресия.}
+\section{Уводни бележки. Базов Python. Линейна регресия.}
 	\subsection{Уводни бележки}
 	Мотивация - Курсът има широко приложение в индустрията.\\	
 	Литература:
@@ -260,7 +266,8 @@ labels=['No', 'Yes'])
 	\subsection{Кратка информация}
 	Мотивация - логистичната регресия се използва за Credit Score модели.\\
 	Моделът има вида: \\
-	$\mathbb{E}(Y|X_1, \dots, X_p) = Prob(Y=1|X_1, \dots, X_p) = \frac{e^{\beta_0 + \beta_1 X_1 + \dots + \beta_p X_p}}{1+ e^{\beta_0 + \beta_1 X_1 + \dots + \beta_p X_p}} $
+	$\mathbb{E}(Y|X_1, \dots, X_p) = Prob(Y=1|X_1, \dots, X_p) = \frac{e^{\beta_0 + \beta_1 X_1 + \dots + \beta_p X_p}}{1+ e^{\beta_0 + \beta_1 X_1 + \dots + \beta_p X_p}} $ \\
+	$\mathbb{E}(Y|X_1, \dots, X_p) = Prob(Y=0|X_1, \dots, X_p) = \frac{e^{\beta_0 + \beta_1 X_1 + \dots + \beta_p X_p}}{1+ e^{\beta_0 + \beta_1 X_1 + \dots + \beta_p X_p}} $
 	
 	Идея за други класификационни модели - Linear Discriminant Analysis, Quadratic Discriminant Analysis, Naive Bayes.
 	Naive Bayes - .... \\
@@ -437,16 +444,67 @@ $$ log(\frac{p(X)}{1-p(X)}) = \beta_0 + \beta_1 X_1 + \beta_2 X_2 + \dots + \bet
 	
 \newpage
 \section{Support Vector Machines. Метод на опорните вектори.}	
-Separating hyperplane. Why is it non-robust?(example) \\
+\includegraphics[scale=0.5]{svn.png}
+Разделяща хиперравнина. \\
+Recall: Хиперравнина се задава с $\beta_0 + \beta_1 X_1 + \dots + \beta_p X_p = 0$. Нормален вектор на тази хиперравнина
+е $(\beta_1, \dots \beta_p)$ и той задава положителната посока. Уравнението може да се запише и като $\beta_0 + (\boldsymbol \beta, \mathbf X) = 0 $, където 
+$\boldsymbol \beta = (\beta_1, \dots \beta_p) $ и $\mathbf X = (X_1, \dots, X_p)$. Една хиперравнина разделя пространството на две части, една с $\beta_0 + (\boldsymbol \beta, \mathbf X) > 0 $, и една с $\beta_0 + (\boldsymbol \beta, \mathbf X) < 0 $. Ако имаме точки в пространството, които можем да разделим с хиперравнина, и дадем labels на тези точки $y_i = 1$ и $y_i=-1$, то 
+$$y_i(\beta_0 + \beta_1 x_{i1} + \dots \beta_p x_{ip}) > 0 .$$
+Оптимизационна задача:
+\begin{align}
+%\begin{equation}
+&\text{да се максимизира } M \\ 
+%\end{equation}
+%\begin{equation}
+&\text{така че } \sum_{j=1}^{p} \beta_j^2 = 1 \\
+%\end{equation}
+%\begin{equation}
+&	y_i(\beta_0 + \beta_1 x_{i1} + \dots \beta_p x_{ip}) \geq M \text{ за } i=1,\dots,n
+%\end{equation}
+\end{align}
+Втора оптимизационна задача(Support Vector Classifier):
+\begin{align}
+&\text{да се максимизира } M \\ 
+&\text{така че } \sum_{j=1}^{p} \beta_j^2 = 1 \\
+&	y_i(\beta_0 + \beta_1 x_{i1} + \dots \beta_p x_{ip}) \geq M(1-\epsilon_i) \text{ за } i=1,\dots,n \\
+& \text{ и } \epsilon_i \geq 0, \sum_i e_i = C 
+\end{align}
 
-	
-	
+Support Vector Machines:\\
+Решението на втора оптимизационна задача може да се запише във вида
+ $$ f(x) = \beta_0 + \sum_{i=1}^n \alpha_i \langle x,x_i \rangle , $$
+ и тогава на нас са ни достатъчни скаларните произведения $ \langle x_i,x'_j \rangle $ за всички $ \binom{n}{2} $ двойки $x_i,x'_j $, $i,j = 1, \dots,n $, за да пресметнем модела.	
+Вместо 	$ \langle x_i,x'_j \rangle $, може да вземем произволна kernel фунцкия $ K( x_i,x'_j ) $. Примерът със скаларното произведение 
+е с линейна фунцкия, но може и нелинейна. \\
+
+Упражнения: Conceptual 1,3 
 	
 \newpage
 \section{Clustering. K-means clustering. Higherarchical clustering, Йерархично клъстериране}	
+	\subsection{Clustering. K-means clustering}
+	\includegraphics[scale=0.5]{k-means-clustering.png}
+	\begin{definition}
+		Клъстери на множеството $\{1, \dots, n\}$ наричаме подмножества $C_1 \cup \dots \cup C_K$, за които е изпълнено:
+		\begin{enumerate}
+			\item $C_1 \cup \dots \cup C_K = \{1, \dots, n\} ,$ 
+			\item $C_i \cap C_j = \emptyset $ за всички $i \neq j.$
+		\end{enumerate}
+	\end{definition}
 
-	K means ex 1 and 3, 10
+	Дефинираме оптимизационна задача:\\
+	\begin{align}
+	& \text{minimize} \Big\{ \sum_{j=i}^K W(C_i) \Big\} \\
+		& W(C_i) = \frac{1}{C_i} \sum_{j,l \in C_i} \sum_{s=1}^p (x_{js}-x_{ls}) ^2
+	\end{align}
 
+	Алгоритъм за K-means: \\
+	Algo \\
+	\subsection{Higherarchical clustering}
+	\includegraphics[scale=0.45]{hierarchical_clustering.png}
+
+
+	Упражнения: \\
+	K means ex 1 and 3, 10 \\
 	Chapter 12, ex 13, hierarchical \\ 
 
 	\cite{hastie01statisticallearning}
