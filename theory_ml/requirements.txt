@@ -1,0 +1,16 @@
+islp
+ipykernel
+
+pandas
+numpy
+scikit-learn
+statsmodels
+tensorflow
+scipy
+
+matplotlib
+
+black
+isort
+
+spyder

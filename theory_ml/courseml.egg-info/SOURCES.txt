@@ -1,0 +1,7 @@
+pyproject.toml
+requirements.txt
+courseml.egg-info/PKG-INFO
+courseml.egg-info/SOURCES.txt
+courseml.egg-info/dependency_links.txt
+courseml.egg-info/requires.txt
+courseml.egg-info/top_level.txt
