@@ -1,67 +1,75 @@
-# example of a logistic regression
-#%%
-from sklearn.linear_model import LogisticRegression
-from sklearn.datasets import make_classification
-import matplotlib.pyplot as plt
+import pandas as pd
 import numpy as np
+from sklearn.model_selection import train_test_split
+from sklearn.linear_model import LogisticRegression
+from sklearn.metrics import (accuracy_score, confusion_matrix, classification_report,
+                             roc_auc_score, roc_curve)
+from sklearn.preprocessing import OneHotEncoder, StandardScaler
+from sklearn.compose import ColumnTransformer
+from sklearn.pipeline import Pipeline
+import matplotlib.pyplot as plt
+import seaborn as sns
 
-# Generate a toy 2D dataset
-X, y = make_classification(n_samples=100, n_features=2, n_redundant=0, n_clusters_per_class=1, random_state=42)
+# Load data
+url = "https://raw.githubusercontent.com/selva86/datasets/master/GermanCredit.csv"
+df = pd.read_csv(url)
 
-# Fit logistic regression model
-model = LogisticRegression()
-model.fit(X, y)
+# Target: credit_risk (1=good, 0=bad in this version)
+print(df['credit_risk'].value_counts(normalize=True))
 
-# Plot the data points
-plt.figure(figsize=(8, 6))
-plt.scatter(X[:, 0], X[:, 1], c=y, cmap='viridis', edgecolors='k', label='Data Points')
+# Simple feature selection (you can expand this)
+categorical_cols = ['status', 'credit_history', 'purpose', 'savings', 
+                    'employment_duration', 'personal_status_sex', 'other_debtors',
+                    'property', 'other_installment_plans', 'housing', 'job', 
+                    'telephone', 'foreign_worker']
+numerical_cols = ['duration', 'amount', 'installment_rate', 'present_residence',
+                  'age', 'number_credits', 'people_liable']
 
-# Create grid to plot decision boundaries
-x_min, x_max = X[:, 0].min() - 0.5, X[:, 0].max() + 0.5
-y_min, y_max = X[:, 1].min() - 0.5, X[:, 1].max() + 0.5
-xx, yy = np.meshgrid(np.arange(x_min, x_max, 0.02), np.arange(y_min, y_max, 0.02))
+X = df[categorical_cols + numerical_cols]
+y = df['credit_risk']
 
-# Predict over the grid
-Z = model.predict(np.c_[xx.ravel(), yy.ravel()])
-Z = Z.reshape(xx.shape)
+# Preprocessing pipeline
+preprocessor = ColumnTransformer(
+    transformers=[
+        ('cat', OneHotEncoder(drop='first', handle_unknown='ignore'), categorical_cols),
+        ('num', StandardScaler(), numerical_cols)
+    ])
 
-# Plot the decision boundary 
+# Full pipeline
+pipeline = Pipeline([
+    ('preprocessor', preprocessor),
+    ('classifier', LogisticRegression(max_iter=1000, class_weight='balanced'))  # Handle imbalance
+])
 
-plt.contour(xx, yy, Z, colors='red', levels=[0.5], linestyles='dashed', linewidths=2)  # Adjusted for visibility
-plt.xlabel('Feature 1')
-plt.ylabel('Feature 2')
-plt.title('Logistic Regression Decision Boundary')
+# Split data
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.3, random_state=42, stratify=y)
+
+# Train
+pipeline.fit(X_train, y_train)
+
+# Predict
+y_pred = pipeline.predict(X_test)
+y_prob = pipeline.predict_proba(X_test)[:, 1]  # Probability of good credit (for scoring)
+
+# Evaluation
+print("Accuracy:", accuracy_score(y_test, y_pred))
+print("ROC AUC:", roc_auc_score(y_test, y_prob))
+print("\nClassification Report:\n", classification_report(y_test, y_pred))
+
+# Confusion Matrix
+cm = confusion_matrix(y_test, y_pred)
+sns.heatmap(cm, annot=True, fmt='d', cmap='Blues')
+plt.xlabel('Predicted')
+plt.ylabel('Actual')
+plt.title('Confusion Matrix')
+plt.show()
+
+# ROC Curve
+fpr, tpr, _ = roc_curve(y_test, y_prob)
+plt.plot(fpr, tpr, label=f'AUC = {roc_auc_score(y_test, y_prob):.3f}')
+plt.plot([0,1], [0,1], 'k--')
+plt.xlabel('False Positive Rate')
+plt.ylabel('True Positive Rate')
+plt.title('ROC Curve')
 plt.legend()
 plt.show()
-#%%
-# 3D plot for the dependent variable
-
-import numpy as np
-import matplotlib.pyplot as plt
-from scipy.special import expit as logistic_function
-
-# Generate a meshgrid for the feature space
-x = np.linspace(-10, 10, 100)
-y = np.linspace(-10, 10, 100)
-X, Y = np.meshgrid(x, y)
-Z = logistic_function(0.5 * X - 0.4 * Y - 0.1)  # Example linear combination
-
-# Create a 3D plot
-fig = plt.figure(figsize=(10, 7))
-ax = fig.add_subplot(111, projection='3d')
-
-# Plot the surface
-surf = ax.plot_surface(X, Y, Z, cmap='viridis', edgecolor='none')
-
-# Labels and title
-ax.set_xlabel('Feature 1 (X)')
-ax.set_ylabel('Feature 2 (Y)')
-ax.set_zlabel('Probability (Z)')
-ax.set_title('3D Visualization of Logistic Regression Probability')
-
-# Add a color bar
-fig.colorbar(surf, shrink=0.5, aspect=5)
-
-plt.show()
-
-# %%

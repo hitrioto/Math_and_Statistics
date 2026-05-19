@@ -9,6 +9,7 @@ tensorflow
 scipy
 
 matplotlib
+seaborn
 
 black
 isort
