@@ -22,7 +22,7 @@
 \usepackage[main=bulgarian, english]{babel}
 
 \usepackage[backend=biber]{biblatex} % 
-\addbibresource{References.bib}
+\addbibresource{References.bib}	
 \usepackage{hyperref}
 
 \usepackage{graphicx}
@@ -107,9 +107,25 @@
 	\tableofcontents
 		
 
-	% \section*{0  \hspace{0.4cm}Упражнение 0. Python, R, инсталиране на среда}
+	\section* {0 \hspace{0.4cm}Теми за разглеждане}
+	%{0  \hspace{0.4cm}Упражнение 0. Python, R, инсталиране на среда}
+	
+	1. Въведение (1, 2.1.{2-5}) \\
+	2. Оценка на точността на моделите (2.2, 2.2.{1-3}) \\ 
+	3. Методи за класификация - (4, 4.1, 4.2, 4.3, 4.3.{1-5}) \\ 
+	4. Генеративни модели за класификация. Сравняване на различни методи за класификация (4.4, 4.4.{1-4}, 4.5, 4.5.{1-2})   \\
+	5. Ресамплиране (5.1) \\
+	6. Методи, базирани на дървета (8, 8.1, 8.1.{1-4}) \\
+	7. Колективни (ансамблови) методи (8.2, 8.2.{1-5}) \\
+	8. XGBoost, CatBoost, LightGBM \\
+	9. Метод на опорните вектори (9, 9.1, 9.1.{1-5}). Класификации, базирани на метода на опорните вектори (9.2, 9.2.{1-2), 9.3, 9.3.{1-3}, 9.4, 9.4.{1-2}, 9.5) \\
+		10. Самообучение без учител въведение, клъстериране (ESL - 14.1, 14.3.1 - 14.3.11) \\
+		11. Йерархично клъстериране (ESL - 14.3.12) \\
+		12. Метод на главните компоненти (ESL - 14.5) \\
+		13. EM методи \\
+		14. Други теми, ако остане време \\
 
-\section{Уводни бележки. Базов Python. Линейна регресия.}
+\section{Уводни бележки. Базов Python.}
 	\subsection{Уводни бележки}
 	Мотивация - Курсът има широко приложение в индустрията.\\	
 	Литература:
@@ -152,40 +168,6 @@ $pip install -r requirements.txt
 
  	\href{https://intro-stat-learning.github.io/ISLP/labs/Ch02-statlearn-lab.html#}{https://intro-stat-learning.github.io/ISLP/labs/Ch02-statlearn-lab.html\#}.
  	
-	\subsection{Линейна регресия}
-	
-	\begin{tikzpicture}
-	\begin{axis} [
-	xlabel     = Weight (kg), % label x axis
-	ylabel     = Height (cm), % label y axis
-	axis lines = left, %set the position of the axes
-	clip       = false, 
-	xmin = 40,  xmax = 105, % set the min and max values of the x-axis
-	ymin = 150, ymax = 200, % set the min and max values of the y-axis
-	]
-	\addplot [only marks] table {\loadedtable};
-	\addplot [no markers, thick, red]
-	table [y={create col/linear regression={y=y}}] {\loadedtable}
-	node [anchor=west] {$\pgfmathprintnumber[precision=2, fixed zerofill]
-		{\pgfplotstableregressiona} \cdot \mathrm{Weight} +
-		\pgfmathprintnumber[precision=1]{\pgfplotstableregressionb}$};
-	\end{axis}
-	\end{tikzpicture}
-	
-	
-	Данни, разглеждане - упражнение 2.8, 2.9 или 2.10 от Applied. \\
-	(!) Добре е или да се разгледат функциите load\_data() от ISLP пакета или
-	да се изнесе частта от кода за конкретния dataset при упражненията.
-	
-	Преговаряне на метод на най-малките квадрати: \\
-	Нека имаме множество от точки $(x_1,y_1), (x_n,y_n), \dots (x_n,y_n)$. 
-	Права от вида $\hat y = \hat \beta_0 + \sum \hat \beta_i  x_i $, която минимизира $\sum (y-\hat{y})^2$  може да се намери с метод на най-малките квадрати. \\
-	С какво е полезна линейната регресия? Mоже да се използва за $"$старт$"$.\\
-	Плюсове и минуси - прост модел, лесно се смята и разбира, лесно се обяснява, недоба в нелинейни задачи. \\
-	
-	Да се добави Мultiple regression и значение на променливите, примерът на Hastie and Tibshirani с успоредни прави. \\
-	
-	Следва Lab 3.6 
 	
 	\subsection{Naive Bayes}
 	
@@ -747,6 +729,44 @@ Math limitations of the SVM:
 
 
 	\cite{hastie01statisticallearning}
+	
+	\section{Неразгледани теми -  Линейна регресия.}
+	
+		\subsection{Линейна регресия}
+	
+	\begin{tikzpicture}
+		\begin{axis} [
+			xlabel     = Weight (kg), % label x axis
+			ylabel     = Height (cm), % label y axis
+			axis lines = left, %set the position of the axes
+			clip       = false, 
+			xmin = 40,  xmax = 105, % set the min and max values of the x-axis
+			ymin = 150, ymax = 200, % set the min and max values of the y-axis
+			]
+			\addplot [only marks] table {\loadedtable};
+			\addplot [no markers, thick, red]
+			table [y={create col/linear regression={y=y}}] {\loadedtable}
+			node [anchor=west] {$\pgfmathprintnumber[precision=2, fixed zerofill]
+				{\pgfplotstableregressiona} \cdot \mathrm{Weight} +
+				\pgfmathprintnumber[precision=1]{\pgfplotstableregressionb}$};
+		\end{axis}
+	\end{tikzpicture}
+	
+	
+	Данни, разглеждане - упражнение 2.8, 2.9 или 2.10 от Applied. \\
+	(!) Добре е или да се разгледат функциите load\_data() от ISLP пакета или
+	да се изнесе частта от кода за конкретния dataset при упражненията.
+	
+	Преговаряне на метод на най-малките квадрати: \\
+	Нека имаме множество от точки $(x_1,y_1), (x_n,y_n), \dots (x_n,y_n)$. 
+	Права от вида $\hat y = \hat \beta_0 + \sum \hat \beta_i  x_i $, която минимизира $\sum (y-\hat{y})^2$  може да се намери с метод на най-малките квадрати. \\
+	С какво е полезна линейната регресия? Mоже да се използва за $"$старт$"$.\\
+	Плюсове и минуси - прост модел, лесно се смята и разбира, лесно се обяснява, недоба в нелинейни задачи. \\
+	
+	Да се добави Мultiple regression и значение на променливите, примерът на Hastie and Tibshirani с успоредни прави. \\
+	
+	Следва Lab 3.6 
+	
 	
 	
 	\newpage

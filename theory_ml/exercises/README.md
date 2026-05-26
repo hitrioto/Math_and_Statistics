@@ -28,9 +28,13 @@ etc.... \
 or just
 uv pip install -r requirements.txt
 
-
+# On MacBook:
+pip3 instead of pip
+source .venv/bin/activate
 
 
 
 # Useful links: \
 https://islp.readthedocs.io/en/latest/installation.html \
+
+
