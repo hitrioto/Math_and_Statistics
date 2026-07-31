@@ -1,0 +1,30 @@
+\section{Generalized linear models. Lasso, Ridge. Generalized additive models. }
+\subsection{Generalized linear models}
+
+
+	Lasso and Ridge from the book.\\
+	Lasso formula, Ridge formula, explanation \\
+	Въпрос: Как Ridge и Lasso fit-ват в общите линейни модели или
+	общите адитивни модели?
+	
+	
+	
+	Да припомним няколко регресии, които сме виждали:\\
+	\begin{itemize}
+		\item линейна - $\mathbb{E}(Y|X_1, \dots, X_p) = \beta_0 + \beta_1 X_1 + \dots + \beta_p X_p $
+		\item логистична -  $ \mathbb{E}(Y|X_1, \dots, X_p) = \frac{e^{\beta_0 + \beta_1 X_1 + \dots + \beta_p X_p}}{1+ e^{\beta_0 + \beta_1 X_1 + \dots + \beta_p X_p}} $
+		\item Поансонова -  $ \mathbb{E}(Y|X_1, \dots, X_p) = e^{\beta_0 + \beta_1 X_1 + \dots + \beta_p X_p} $
+ 	\end{itemize}
+	
+	Общият линеен модел изглежда по следния начин(където $\eta$ е $"$свързваща фунцкия$"$):\\
+	$$\eta(\mathbb{E}(Y|X_1, \dots, X_p)) = \beta_0 + \beta_1 X_1 + \dots + \beta_p X_p $$
+	
+	lab 6 за ridge lasso \\
+	Change $\lambda$ for Lasso example.
+	
+	
+	
+	Подробно разписване на оптимизационната задача. Идея за множество от бъдещите задачи
+	се разглеждат като оптимизационни.
+	
+\newpage	

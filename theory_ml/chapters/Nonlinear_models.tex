@@ -1,0 +1,16 @@
+\section{Нелинейни модели. Piecewise polynomials. Сплайни(Splines). Общи адитивни модели}
+Lab 7.8 python \\
+ex 7.9 6,10,11 \\
+\subsection{Общи адитивни модели(Generalized additive models)}
+Това е 7.7 от Python книгата. \\
+
+Общ адитивен модел се за регресия се задава с уравненията(където заменяме $x_i$ с $f(x_i)$ от модела на линейна регресия):
+$$y_i = \beta_0 + \sum_{j=1}^p f_j(x_{ij}) + \epsilon_i = \beta_0 + f_1(x_{i1}) + \dots + f_n(x_{ip}) + e_i $$
+за $i = 0,1 \dots n$.
+Общ адитивен модел се за класификация се задава с формулите:
+$$ log(\frac{p(X)}{1-p(X)}) = \beta_0 + \beta_1 f_1(X_1) + \beta_2 f_2(X_2) + \dots + \beta_p f_p(X_p),$$
+където отново $"$сме заменили $X$-овете от логистичната регресия с $f(X)$-ове$"$:
+$$ log(\frac{p(X)}{1-p(X)}) = \beta_0 + \beta_1 X_1 + \beta_2 X_2 + \dots + \beta_p X_p $$
+
+	
+\newpage	
