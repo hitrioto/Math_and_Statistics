@@ -1,0 +1,65 @@
+\section{Логистична регресия. Linear Discriminant \\ analysis.}
+
+	\subsection{Кратка информация}
+	Мотивация - логистичната регресия се използва за Credit Score модели.\\
+	Моделът има вида: \\
+	$\mathbb{E}(Y|X_1, \dots, X_p) = Prob(Y=1|X_1, \dots, X_p) = \frac{e^{\beta_0 + \beta_1 X_1 + \dots + \beta_p X_p}}{1+ e^{\beta_0 + \beta_1 X_1 + \dots + \beta_p X_p}} $ \\
+	$\mathbb{E}(Y|X_1, \dots, X_p) = Prob(Y=0|X_1, \dots, X_p) = \frac{e^{\beta_0 + \beta_1 X_1 + \dots + \beta_p X_p}}{1+ e^{\beta_0 + \beta_1 X_1 + \dots + \beta_p X_p}} $
+	
+	Идея за други класификационни модели - Linear Discriminant Analysis, Quadratic Discriminant Analysis, 
+	Linear Discriminant analysis \\
+	Ако класовете са с многомерно гаусово разпределение, или
+	$$f_k(x) = \frac{1}{(2\pi)^p/2 \left | \Sigma_k  \right |} e^{-\frac{1}{2} (x-\mu_k)^T \Sigma_k^{-1}(x-\mu_k)} $$
+	в специалния случай, където ковариационните матрици са равни, $\Sigma_k = \Sigma \forall k$, имаме 
+	Линеен дискриминантен анализ.
+	
+	
+	\subsection{Упражнения}
+	Conceptual 4.8 section, ex 1, 2, 12 \\
+
+	\begin{exercise}[Sec 4.8, Conceptual ex. 1]
+			Using a little bit of algebra, prove that (4.2) is equivalent to (4.3). In
+		other words, the logistic function representation and logit represen-
+		tation for the logistic regression model are equivalent.
+	\end{exercise}
+
+	\begin{exercise}[Sec 4.8, Conceptual ex. 2]
+		А
+	\end{exercise}
+
+
+	\begin{exercise}[Sec 4.8, Conceptual ex. 12]
+	Suppose that you wish to classify an observation $x \in R $ into apples
+	and oranges. You fit a logistic regression model and find that
+	
+	Pr(Y = orange|X = x) =
+	%exp(ˆβ0 + ˆβ1x)
+	%1 + exp(ˆβ0 + ˆβ1x)
+	.
+	Your friend fits a logistic regression model to the same data using the
+	softmax formulation in (4.13), and finds that
+	$$Pr(Y= orange| X=x) = \frac{exp(\hat{a}_{orange} + \hat{a}_{orangex}) }{den}$$
+	Pr(Y = orange|X = x) =
+	%exp(ˆαorange0 + ˆαorange1x)
+	%exp(ˆαorange0 + ˆαorange1x) + exp(ˆαapple0 + ˆαapple1x).
+	(a) What is the log odds of orange versus apple in your model?
+	(b) What is the log odds of orange versus apple in your friend’s
+	model?
+	(c) Suppose that in your model, $\beta_0$ and $\beta_1$. What are
+	the coefficient estimates in your friend’s model? Be as specific
+	as possible.
+	(d) Now suppose that you and your friend fit the same two models
+	on a different data set. This time, your friend gets the coefficient
+	%estimates ˆαorange0 = 1.2, ˆαorange1 = −2, ˆαorange0 = 3, ˆαorange1 =
+	0.6. What are the coefficient estimates in your model?
+	(e) Finally, suppose you apply both models from (d) to a data set
+	with 2,000 test observations. What fraction of the time do you
+	expect the predicted class labels from your model to agree with
+	those from your friend’s model? Explain your answer. \\
+	\end{exercise}
+
+
+	
+	
+	
+	\newpage

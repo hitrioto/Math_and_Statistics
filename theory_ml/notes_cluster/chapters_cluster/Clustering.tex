@@ -1,0 +1,32 @@
+\section{Clustering. K-means clustering. Higherarchical clustering, Йерархично клъстериране}	
+	\subsection{Clustering. K-means clustering}
+	\includegraphics[scale=0.5]{k-means-clustering.png}
+	\begin{definition}
+		Клъстери на множеството $\{1, \dots, n\}$ наричаме подмножества $C_1 \cup \dots \cup C_K$, за които е изпълнено:
+		\begin{enumerate}
+			\item $C_1 \cup \dots \cup C_K = \{1, \dots, n\} ,$ 
+			\item $C_i \cap C_j = \emptyset $ за всички $i \neq j.$
+		\end{enumerate}
+	\end{definition}
+
+	Дефинираме оптимизационна задача:\\
+	\begin{align}
+	& \text{minimize} \Big\{ \sum_{j=i}^K W(C_i) \Big\} \\
+		& W(C_i) = \frac{1}{C_i} \sum_{j,l \in C_i} \sum_{s=1}^p (x_{js}-x_{ls}) ^2
+	\end{align}
+
+	Алгоритъм за K-means: \\
+	Algo \\
+	\subsection{Higherarchical clustering}
+	\includegraphics[scale=0.45]{hierarchical_clustering.png}
+
+
+	Упражнения: \\
+	K means ex 1 and 3, 10 \\
+	Chapter 12, ex 13, hierarchical \\ 
+
+
+\cite{hastie01statisticallearning}
+
+
+\newpage

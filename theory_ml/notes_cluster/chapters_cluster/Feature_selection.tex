@@ -1,0 +1,58 @@
+	\section{Feature Selection. Model Selection - AIC, BIC. Bias-Variance tradeoff. K-fold Cross Validation.} 
+	Weight of evidence, information value - използват се в индустрията, например при разработка на credit score модел, логистична регресия. \\
+	В книгата има 4 подхода при избор на оптимален модел: \\
+	$C_p$ статистика: $C_p = \frac{1}{n}(RSS + 2d \hat \sigma^2)$ за squared error loss
+	\begin{itemize}
+		\item $AIC = \frac{1}{n}(RSS + 2d \hat \sigma^2)$
+		\item $BIC = \frac{1}{n}(RSS + log(n) d \hat \sigma^2)$
+		\item $Adjusted \hspace{0.1cm} R^2 = 1 - \frac{RSS/(n-d-1)}{TSS/(n-1)} $
+	\end{itemize}
+	(да се добави значението на параметрите по-късно) \\
+	(код за пресмятане с пример) \\
+	
+%	\begin{python}[language=Python]
+%	def BIC_calc(free_param, stat, dof):
+%	n = dof + free_param
+%	k = free_param
+%	return stat + np.log(n)*k
+%\end{python}
+
+	lab 6 за model selection \\
+	Forward, Backward selection example \\
+	Следните алгоритми са взети от книгата: \\
+	Алгоритъм за best subset selection: 
+	\begin{enumerate}
+		\item Let M0 denote the null model, which contains no predictors. This
+		model simply predicts the sample mean for each observation.
+		\item For k = 1, 2, . . . p: 
+			\begin{enumerate}
+				\item Fit all $(?)$ p choose k models that contain exactly k predictors.
+				\item Pick the best among these  $(?)$ p choose k models, and call it Mk. Here best
+				is defined as having the smallest RSS, or equivalently largest R2.
+			\end{enumerate}
+		\item Select a single best model from among M0, . . . , Mp using using the
+		prediction error on a validation set, Cp (AIC), BIC, or adjusted R2.
+		Or use the cross-validation method
+	\end{enumerate}
+	
+	Алгоритъм за Forward selection: 
+	\begin{enumerate}
+				\item Let M0 denote the null model, which contains no predictors.
+		\item For k = 1, 2, . . . p: 
+		\begin{enumerate}
+			\item Consider all $p-k$   models that augment the predictors in Mk
+			with one additional predictor.
+			\item Choose the best among these$p-k$    models, and call it Mk+1.
+			Here best is defined as having smallest RSS or highest R2.
+		\end{enumerate}
+		\item Select a single best model from among M0, . . . , Mp using the pre-
+		diction error on a validation set, Cp (AIC), BIC, or adjusted R2. Or
+		use the cross-validation method.
+	\end{enumerate}
+	
+	
+	Credit data\\
+	
+	5.3 Lab python book: Cross-Validation and the Bootstrap \\
+	
+\newpage
